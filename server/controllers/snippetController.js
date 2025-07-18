@@ -29,7 +29,7 @@ const getAllSnippets = async (req, res) => {
 
 const getSnippetById = async (req, res) => {
   try {
-    const snippet = Snippet.findById(req.params.id);
+    const snippet =await Snippet.findById(req.params.id);
     if (!snippet) {
       res.status(404).json({ error: "Snippet Not Found!" });
     }
@@ -49,10 +49,25 @@ const deleteSnippet = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+const updateSnippet = async (req, res) => {
+  const { title, language, code, tags } = req.body;
+  try {
+    const updated = await Snippet.findByIdAndUpdate(
+      req.params.id,
+      { title, language, code, tags },
+      { new: true }
+    );
+    if (!updated) return res.status(404).json({ error: "Snippet not found" });
+    res.json(updated);
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+};
 
 module.exports = {
   createSnippet,
   getAllSnippets,
   getSnippetById,
   deleteSnippet,
+  updateSnippet,
 };
