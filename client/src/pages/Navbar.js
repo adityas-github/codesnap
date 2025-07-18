@@ -9,15 +9,26 @@ function Navbar() {
         style={{
           display: "flex",
           justifyContent: "space-between",
+          alignContent: "center",
           color: "black",
         }}
       >
         <h2>CodeSnap</h2>
-        <div>
-          <Link to="/" style={{ marginRight: "1rem" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <Link to="/" style={{ marginRight: "1rem", textDecoration: "none" }}>
             Home
           </Link>
-          <Link to="/add">Add Snippet</Link>
+          <Link
+            to="/add"
+            style={{ marginRight: "1rem", textDecoration: "none" }}
+          >
+            Add Snippet
+          </Link>
         </div>
       </div>
     </nav>

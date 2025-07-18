@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import SnippetCard from "./SnippetCard";
 
 function Home() {
   const [snippets, setSnippets] = useState([]);
@@ -52,36 +53,11 @@ function Home() {
         <p>No snippets available.</p>
       ) : (
         snippets.map((snippet) => (
-          <div key={snippet._id} className="snippet-card">
-            <h3>{snippet.title}</h3>
-            <p>
-              <strong>Language:</strong> {snippet.language}
-            </p>
-            <pre
-              style={{
-                backgroundColor: "#f1f1f1",
-                padding: "0.6rem",
-                borderRadius: "5px",
-                overflowX: "auto",
-              }}
-            >
-              {snippet.code}
-            </pre>
-            <p>
-              <strong>Tags:</strong> {snippet.tags}
-            </p>
-            <div className="snippet-actions">
-              <Link to={`/edit/${snippet._id}`}>
-                <button style={{ marginRight: "0.5rem" }}>Edit</button>
-              </Link>
-              <button
-                onClick={() => handleDelete(snippet._id)}
-                style={{ backgroundColor: "red" }}
-              >
-                Delete
-              </button>
-            </div>
-          </div>
+          <SnippetCard
+            key={snippet._id}
+            snippet={snippet}
+            handleDelete={handleDelete}
+          />
         ))
       )}
     </div>
